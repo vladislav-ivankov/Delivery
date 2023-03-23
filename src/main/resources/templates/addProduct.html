@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery</title>
+    <style>
+        body {
+            background-color: #f8f8f8;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        form {
+            margin: 0 auto;
+            width: 500px;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        form p {
+            margin: 0 0 10px;
+        }
+
+        form input[type="text"], form input[type="number"] {
+            display: block;
+            width: 96%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        form input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #77DD77;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #52B74E;
+        }
+
+        form textarea {
+            display: block;
+            width: 96%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+<h2>Add product</h2>
+<form th:action="@{/admin/addProduct}" th:method="POST" th:object="${product}">
+    <p><input type="text" th:field="*{image}" placeholder="Image Url"/></p>
+    <p><input type="text" th:field="*{productName}" placeholder="Product name"/></p>
+    <p><input type="text" th:field="*{category}" placeholder="Category"/></p>
+    <p><input type="number" th:field="*{price}" step="0.01" placeholder="Price"/></p>
+    <p><textarea type="text" th:field="*{description}" placeholder="Description"/></p>
+    <p><input type="submit" value="Add Product"/></p>
+</form>
+</body>
+</html>

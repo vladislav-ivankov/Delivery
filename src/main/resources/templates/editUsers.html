@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery</title>
+    <style>
+        table {
+            width: 100%;
+            background-color: black;
+            color: white;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid white;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+            font-weight: bold;
+        }
+
+        td button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        td button:hover {
+            background-color: #a30808;
+        }
+
+        h1 {
+            margin-left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            border-bottom: 1px solid black;
+            padding: 10px;
+            background-color: white;
+        }
+
+        button.add-admin {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            float: left;
+            margin-right: 20px;
+            margin-top: 20px;
+        }
+
+        button.add-admin:hover {
+            background-color: #0b6207;
+        }
+    </style>
+</head>
+<body>
+<a th:href="@{/admin/addAdmin}"><button class="add-admin">Add new admin</button></a>
+<h1>User Console</h1>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Year of birth</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Role</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.yearOfBirth}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.phoneNumber}"></td>
+            <td th:text="${user.role}"></td>
+            <td>
+                <form th:action="@{/admin/editUser/{id}(id=${user.id})}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

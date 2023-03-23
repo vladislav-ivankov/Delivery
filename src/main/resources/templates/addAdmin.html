@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery</title>
+    <style>
+        body {
+            background-color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .addAdmin-form {
+            margin: 50px auto;
+            width: 300px;
+            background-color: #F5F5F5;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .addAdmin-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        .addAdmin-form input[type="text"],
+        .addAdmin-form input[type="email"],
+        .addAdmin-form input[type="password"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        .addAdmin-form input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #77DD77;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .addAdmin-form input[type="submit"]:hover {
+            background-color: #52B74E;
+        }
+
+        .addAdmin-form p {
+            margin: 0;
+        }
+
+        span {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="addAdmin-form">
+    <h2>Add Admin</h2>
+    <form th:action="@{/admin/addAdmin}" th:method="POST" th:object="${user}">
+        <p><input type="text" th:field="*{username}" placeholder="Username"/></p>
+        <p><input type="email" th:field="*{email}" placeholder="Email"/></p>
+        <p><input type="password" th:field="*{password}" placeholder="Password"/></p>
+        <p><input type="password" th:field="*{confirmPassword}" placeholder="Confirm password"/></p>
+        <span th:if="${error}" th:text="${error}" style="color: red"></span>
+        <p><input type="submit" value="Add Admin"></p>
+    </form>
+</div>
+</body>
+</html>

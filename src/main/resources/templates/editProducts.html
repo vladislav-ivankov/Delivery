@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery</title>
+    <style>
+        table {
+            width: 100%;
+            background-color: black;
+            color: white;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid white;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+            font-weight: bold;
+        }
+
+        td button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        td button:hover {
+            background-color: #a30808;
+        }
+
+        h1 {
+            margin-left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            border-bottom: 1px solid black;
+            padding: 10px;
+            background-color: white;
+        }
+
+        button.add-product {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            float: left;
+            margin-right: 20px;
+            margin-top: 20px;
+        }
+
+        button.add-product:hover {
+            background-color: #0b6207;
+        }
+    </style>
+</head>
+<body>
+<a th:href="@{/admin/addProduct}"><button class="add-product">Add product</button></a>
+<h1>product console</h1>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Product name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>description</th>
+        <th>Product Image Url</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.productName}"></td>
+        <td th:text="${product.category}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.image}"></td>
+        <td>
+            <form th:action="@{/admin/editProduct/{id}(id=${product.id})}" method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
