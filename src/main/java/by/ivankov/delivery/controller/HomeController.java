@@ -5,6 +5,7 @@ import by.ivankov.delivery.model.Product;
 import by.ivankov.delivery.model.User;
 import by.ivankov.delivery.repository.ProductRepository;
 import by.ivankov.delivery.security.RegistrationDetails;
+import by.ivankov.delivery.service.ProductService;
 import by.ivankov.delivery.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -13,10 +14,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -25,29 +24,18 @@ import java.util.List;
 public class HomeController {
     private final UserServiceImpl userService;
     private final ProductRepository productRepository;
+    private final ProductService productService;
 
     @Autowired
-    public HomeController(UserServiceImpl userService, ProductRepository productRepository) {
+    public HomeController(UserServiceImpl userService, ProductRepository productRepository, ProductService productService) {
         this.userService = userService;
         this.productRepository = productRepository;
+        this.productService = productService;
     }
 
     @GetMapping("/home")
     public String homePage(Authentication authentication, Model model) {
-        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            model.addAttribute("loginUrl", "/guest/login");
-            model.addAttribute("regUrl", "/guest/reg");
-        } else {
-            model.addAttribute("loginUrl", "/user/cart");
-            model.addAttribute("regUrl", "/user/logout");
-            if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-                model.addAttribute("role", "ADMIN");
-                model.addAttribute("editUsersUrl", "/admin/editUser");
-                model.addAttribute("editProductsUrl", "/admin/editProduct");
-            } else {
-                model.addAttribute("role", "USER");
-            }
-        }
+        userService.givePagesByRole(authentication, model);
         List<Product> products = productRepository.findAll();
         model.addAttribute("products", products);
         return "home";
@@ -82,5 +70,20 @@ public class HomeController {
             model.addAttribute("error", e.getMessage());
             return "register";
         }
+    }
+
+    @GetMapping("/search")
+    public String searchProducts(@RequestParam("query") String query, Model model) {
+        List<Product> products = productService.searchProducts(query);
+        model.addAttribute("products", products);
+        return "productPage";
+    }
+
+    @GetMapping("/productPage/{id}")
+    public String getProduct(@PathVariable("id") Long id, Authentication authentication, Model model) {
+        userService.givePagesByRole(authentication, model);
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
+        return "productPage";
     }
 }

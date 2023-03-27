@@ -1,28 +1,27 @@
 package by.ivankov.delivery.controller;
 
-import by.ivankov.delivery.model.Cart;
-import by.ivankov.delivery.model.Product;
-import by.ivankov.delivery.repository.ProductRepository;
+import by.ivankov.delivery.exception.ServiceException;
+import by.ivankov.delivery.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
-    private final ProductRepository productRepository;
+    private final CartService cartService;
 
     @Autowired
-    public UserController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public UserController(CartService cartService) {
+        this.cartService = cartService;
     }
 
     @GetMapping("/logout")
@@ -32,19 +31,13 @@ public class UserController {
     }
 
     @GetMapping("/cart")
-    public String cartPage() {
+    public String cartPage(){
         return "cart";
     }
-
-    @PostMapping("/addToCart")
-    public String addProductToCart(@RequestParam("productId") Long id, HttpSession session) {
-        Cart cart = (Cart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new Cart();
-            session.setAttribute("cart", cart);
-        }
-        Product product = productRepository.getProductById(id);
-        cart.getProductSet().add(product);
-        return "redirect:user/home";
+    @PostMapping("/addToCart/{productId}")
+    public ResponseEntity<String> addToCart(@PathVariable Long productId, Authentication authentication) throws ServiceException {
+        String username = authentication.getName();
+        cartService.addProductToCart(username, productId);
+        return ResponseEntity.ok("Product added to cart successfully");
     }
 }

@@ -1,8 +1,8 @@
 package by.ivankov.delivery.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "carts")
@@ -11,22 +11,34 @@ public class Cart {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "carts_products",
-    joinColumns = @JoinColumn(name = "carts_id"),
-    inverseJoinColumns = @JoinColumn(name = "products_id"))
-    private Set<Product> productSet = new HashSet<>();
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
 
     public Cart() {
     }
 
-    public Cart(Long id, User user, Set<Product> productSet) {
+    public Cart(Long id, User user, List<Product> products) {
         this.id = id;
         this.user = user;
-        this.productSet = productSet;
+        this.products = products;
+    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public Long getId() {
@@ -37,28 +49,13 @@ public class Cart {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Set<Product> getProductSet() {
-        return productSet;
-    }
-
-    public void setProductSet(Set<Product> productSet) {
-        this.productSet = productSet;
-    }
 
     @Override
     public String toString() {
         return "Cart{" +
                 "id=" + id +
                 ", user=" + user +
-                ", productSet=" + productSet +
+                ", products=" + products +
                 '}';
     }
 }

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Delivery</title>
-    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/productPage.css}">
 </head>
 <body>
 <div class="green-bar">
-    <div class="delivery">Delivery</div>
+    <div class="delivery"><a th:href="@{/guest/home}" class="delivery">Delivery</a></div>
 </div>
 <div class="header">
     <div class="left-link">
@@ -36,18 +36,24 @@
     </div>
 </div>
 <div class="container">
-    <div th:each="product : ${products}" class="product">
-        <a th:href="@{/guest/productPage/{id}(id=${product.id})}" class="product-page">
-            <div class="product-image-container">
-                <img class="product-image" th:src="${product.image}" alt="Product Image">
-            </div>
-            <div class="product-name" th:text="${product.productName}"></div>
-            <div class="product-price" th:text="${product.price} + ' $'"></div>
-            <form th:action="@{/user/addToCart/{id}(id=${product.id})}" th:method="POST" class="addToCart-form">
-                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                <input type="submit" value="Add to cart"/>
-            </form>
-        </a>
+    <h1 class="product-name" th:text="${product.productName}"></h1>
+    <div class="product-image-container">
+        <img class="product-image" th:src="${product.image}" alt="Product Image">
+        <p class="product-description" th:text="${product.description}"></p>
+    </div>
+    <div class="product-info">
+
+        <div class="product-price" th:text="${product.price}"></div>
+        <div class="product-buttons">
+            <button><a th:href="@{/user/cart}"></a> Add to cart</button>
+            <button><a></a>Buy now</button>
+        </div>
+        <div class="characteristics">
+            <div>Characteristics:</div>
+            <div>Compound - <span th:text="${product.compound}"></span></div>
+            <div>Storage conditions - <span th:text="${product.storage}"></span></div>
+            <div>Manufacturer - <span th:text="${product.manufacturer}"></span></div>
+        </div>
     </div>
 </div>
 </body>

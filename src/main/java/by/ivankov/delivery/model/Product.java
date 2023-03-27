@@ -20,6 +20,12 @@ public class Product {
     private String description;
     @Column(name = "image")
     private String image;
+    @Column(name = "compound")
+    private String compound;
+    @Column(name = "storage")
+    private String storage;
+    @Column(name = "manufacturer")
+    private String manufacturer;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "carts_id")
     private Cart cart;
@@ -27,13 +33,18 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String productName, String category, BigDecimal price, String description, String image) {
+    public Product(Long id, String productName, String category, BigDecimal price, String description,
+                   String image, String compound, String storage, String manufacturer, Cart cart) {
         this.id = id;
         this.productName = productName;
         this.category = category;
         this.price = price;
         this.description = description;
         this.image = image;
+        this.compound = compound;
+        this.storage = storage;
+        this.manufacturer = manufacturer;
+        this.cart = cart;
     }
 
     public String getImage() {
@@ -92,6 +103,31 @@ public class Product {
         this.cart = cart;
     }
 
+    public String getCompound() {
+        return compound;
+    }
+
+    public void setCompound(String compound) {
+        this.compound = compound;
+    }
+
+    public String getStorage() {
+        return storage;
+    }
+
+    public void setStorage(String storage) {
+        this.storage = storage;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+
     @Override
     public String toString() {
         return "Product{" +
@@ -101,6 +137,9 @@ public class Product {
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 ", image='" + image + '\'' +
+                ", compound='" + compound + '\'' +
+                ", storage='" + storage + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
                 ", cart=" + cart +
                 '}';
     }
