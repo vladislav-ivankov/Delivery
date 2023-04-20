@@ -11,13 +11,11 @@
 </div>
 <div class="header">
     <div class="left-link">
-        <a th:if="${role == 'ADMIN'}" th:href="${editUsersUrl}">
+        <a class="edit-users" th:if="${role == 'ADMIN'}" th:href="${editUsersUrl}">
             <img src="/img/button/edit-user.png">
-            <div>Edit users</div>
         </a>
-        <a th:if="${role == 'ADMIN'}" th:href="${editProductsUrl}">
+        <a class="edit-products" th:if="${role == 'ADMIN'}" th:href="${editProductsUrl}">
             <img src="/img/button/edit-product.png">
-            <div>Edit products</div>
         </a>
     </div>
     <div class="search-bar">
@@ -28,12 +26,17 @@
     </div>
     <div class="right-links">
         <div class="links">
+            <span th:if="${balance != null}"><span class="balance" th:text="${balance + '$'}"></span></span>
             <button><a th:href="${loginUrl}" th:text="${role == 'USER' || role == 'ADMIN' ? 'Cart' : 'Sign In'}"></a>
             </button>
             <button><a th:href="${regUrl}" th:text="${role == 'USER' || role == 'ADMIN' ? 'Logout' : 'Sign Up'}"></a>
             </button>
         </div>
     </div>
+</div>
+<div calss="a">
+    <button class="category"><a th:href="@{/guest/category}">Categories</a></button>
+    <button class="order-history"><a th:href="@{/user/account}">Order history</a></button>
 </div>
 <div class="container">
     <div th:each="product : ${products}" class="product">
@@ -47,8 +50,10 @@
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                 <input type="submit" value="Add to cart"/>
             </form>
+            <!--            <button class="favorites">Favorites</button>-->
         </a>
     </div>
+    <p th:if="${success}" class="alert alert-success" th:text="${success}"></p>
 </div>
 </body>
 </html>

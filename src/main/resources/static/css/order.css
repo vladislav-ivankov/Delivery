@@ -1,0 +1,225 @@
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    background-color: #77DD77;
+    padding: 0 20px;
+}
+
+.right-links {
+    display: flex;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+button {
+    background-color: #228B22;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #176417;
+    transform: scale(1.05);
+}
+
+.search-bar {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar form {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input[type="text"] {
+    border-radius: 20px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 300px;
+    margin-right: 10px;
+}
+
+.search-bar button[type="submit"] {
+    background-color: #228B22;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-bar button[type="submit"]:hover {
+    background-color: #176417;
+}
+
+.delivery {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+a .delivery {
+    color: white;
+    text-decoration: none;
+}
+
+.green-bar {
+    width: 100%;
+    height: 60px;
+    background-color: #228B22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+}
+
+.order {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    border-bottom: 3px solid seagreen;
+}
+
+.container {
+    width: 500px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+}
+
+.container input[type="text"] {
+    border-radius: 20px;
+    border: 2px solid #ccc;
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+.container button {
+    background-color: #228B22;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 30%;
+    margin-left: 70%;
+}
+
+.payment-method, .order-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.payment-options label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.payment-options input[type="radio"] {
+    margin-right: 10px;
+}
+
+input[type="submit"] {
+    display: block;
+    margin: 20px auto 0;
+    background-color: #228B22;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+}
+
+input[type="submit"]:hover {
+    background-color: #176417;
+    transform: scale(1.05);
+}
+
+.card {
+    background-color: #aaaaaa;
+    border-radius: 5px;
+    padding: 20px;
+    width: 450px;
+}
+
+.card-number {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-number input[type="text"] {
+    border: none;
+    font-size: 24px;
+    outline: none;
+    text-align: center;
+    width: 100%;
+}
+
+.card-holder input[type="text"] {
+    border: none;
+    outline: none;
+    text-align: center;
+    width: 70%;
+}
+
+.card-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-expiry input[type="text"] {
+    border: none;
+    outline: none;
+    text-align: center;
+    width: 100px;
+}
+
+.card-cvv input[type="text"] {
+    border: none;
+    outline: none;
+    text-align: center;
+    width: 50px;
+}

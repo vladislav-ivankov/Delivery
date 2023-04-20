@@ -1,0 +1,40 @@
+form {
+    margin: 0 auto;
+    width: 500px;
+    padding: 20px;
+}
+
+h2 {
+    margin-left: 46%;
+}
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"] {
+    background-color: #cccccc;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+form input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #77DD77;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+form input[type="submit"]:hover {
+    background-color: #52B74E;
+}

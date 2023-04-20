@@ -4,18 +4,13 @@ import by.ivankov.delivery.exception.ServiceException;
 import by.ivankov.delivery.model.Product;
 import by.ivankov.delivery.model.User;
 import by.ivankov.delivery.repository.ProductRepository;
-import by.ivankov.delivery.security.RegistrationDetails;
 import by.ivankov.delivery.service.ProductService;
 import by.ivankov.delivery.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -38,15 +33,10 @@ public class HomeController {
         userService.givePagesByRole(authentication, model);
         List<Product> products = productRepository.findAll();
         model.addAttribute("products", products);
-        return "home";
-    }
-
-    @GetMapping("/info")
-    public String userInfo() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        RegistrationDetails regDetails = (RegistrationDetails) authentication.getPrincipal();
-        System.out.println(regDetails.getUser());
-
+        if (authentication != null) {
+            User user = userService.getUserByUsername(authentication.getName());
+            model.addAttribute("balance", user.getBalance());
+        }
         return "home";
     }
 
@@ -73,10 +63,11 @@ public class HomeController {
     }
 
     @GetMapping("/search")
-    public String searchProducts(@RequestParam("query") String query, Model model) {
+    public String searchProducts(@RequestParam("query") String query, Model model, Authentication authentication) {
+        userService.givePagesByRole(authentication, model);
         List<Product> products = productService.searchProducts(query);
         model.addAttribute("products", products);
-        return "productPage";
+        return "searchPage";
     }
 
     @GetMapping("/productPage/{id}")

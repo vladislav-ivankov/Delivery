@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/receipt.css}">
+</head>
+<body>
+<div class="green-bar">
+    <div class="delivery"><a th:href="@{/guest/home}" class="delivery">Delivery</a></div>
+</div>
+<div class="header">
+    <div class="right-links">
+        <div class="links">
+            <button><a th:href="@{/user/logout}">Logout</a></button>
+        </div>
+    </div>
+</div>
+<div class="page-name">
+    <div class="receipt">Receipt</div>
+</div>
+<div class="order-receipt">
+    <div class="order">Order №: <span th:text="${orderNumber}"></span></div>
+    <div class="time">Time: <span th:text="${#temporals.format(time, 'dd-MM-yyyy HH:mm:ss')}"></span></div>
+    ****************************************************************
+    <div th:each="product : ${products}">
+        <h5 class="name" th:text="${product.productName}"></h5>
+        <div class="price"><span th:text="${product.price + ' $'}"></span></div>
+        <div class="quantity">X <span></span></div>
+        <div class="subtotal">= <span></span></div>
+    </div>
+    ****************************************************************
+    <div>Total:</div>
+</div>
+</body>
+</html>

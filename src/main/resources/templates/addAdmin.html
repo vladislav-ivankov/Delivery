@@ -11,6 +11,7 @@
     <form th:action="@{/admin/addAdmin}" th:method="POST" th:object="${user}">
         <p><input type="text" th:field="*{username}" placeholder="Username"/></p>
         <p><input type="email" th:field="*{email}" placeholder="Email"/></p>
+        <p><input type="text" th:field="*{age}" placeholder="Age"/></p>
         <p><input type="password" th:field="*{password}" placeholder="Password"/></p>
         <p><input type="password" th:field="*{confirmPassword}" placeholder="Confirm password"/></p>
         <span th:if="${error}" th:text="${error}" style="color: red"></span>

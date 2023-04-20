@@ -5,6 +5,7 @@ import by.ivankov.delivery.exception.ServiceException;
 import by.ivankov.delivery.model.User;
 import by.ivankov.delivery.repository.UserRepository;
 import by.ivankov.delivery.security.RegistrationDetails;
+import by.ivankov.delivery.validate.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,15 +30,19 @@ public class UserServiceImpl implements UserDetailsService {
     }
 
     public void save(User user, String role) throws ServiceException {
+        Validator validator = new Validator();
         if (!user.getPassword().equals(user.getConfirmPassword())) {
             throw new ServiceException("Password mismatch");
         }
         if (user.getPassword().isEmpty() || user.getUsername().isEmpty() || user.getPassword().isEmpty() ||
-                user.getPhoneNumber().describeConstable().isEmpty() || user.getConfirmPassword().isEmpty()) {
+                user.getConfirmPassword().isEmpty() || user.getAge().isEmpty()) {
             throw new ServiceException("All fields must be filled");
         }
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new ServiceException("Username already exists");
+        }
+        if (validator.ageValidate(user.getAge()) == false) {
+            throw new ServiceException("Incorrect age");
         }
         user.setPassword(mvcConfig.getPasswordEncoder().encode(user.getPassword()));
         user.setRole(role);
@@ -66,7 +71,16 @@ public class UserServiceImpl implements UserDetailsService {
             }
         }
     }
+
     public User findByUsername(String username) {
         return userRepository.findUserByUsername(username);
+    }
+
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public User getUserByUsername (String username) {
+        return userRepository.getUserByUsername(username);
     }
 }

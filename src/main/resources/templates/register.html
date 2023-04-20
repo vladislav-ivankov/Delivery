@@ -10,9 +10,8 @@
     <h2>Sign Up</h2>
     <form th:action="@{/guest/reg}" th:method="POST" th:object="${user}">
         <p><input type="text" th:field="*{username}" placeholder="Username"/></p>
-        <p><input type="number" th:field="*{yearOfBirth}" placeholder="Year of brith"/></p>
+        <p><input type="text" th:field="*{age}" placeholder="Age"/></p>
         <p><input type="email" th:field="*{email}" placeholder="Email"/></p>
-        <p><input type="tel" th:field="*{phoneNumber}" placeholder="Phone number"/></p>
         <p><input type="password" th:field="*{password}" placeholder="Password"/></p>
         <p><input type="password" th:field="*{confirmPassword}" placeholder="Confirm password"/></p>
         <span th:if="${error}" th:text="${error}"></span>

@@ -20,6 +20,7 @@ body {
 }
 
 .addAdmin-form input[type="text"],
+.addAdmin-form input[type="number"],
 .addAdmin-form input[type="email"],
 .addAdmin-form input[type="password"] {
     display: block;

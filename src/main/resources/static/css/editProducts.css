@@ -55,3 +55,8 @@ button.add-product {
 button.add-product:hover {
     background-color: #0b6207;
 }
+
+.home {
+    display: flex;
+    justify-content: flex-end;
+}

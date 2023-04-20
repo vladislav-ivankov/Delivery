@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/order.css}">
+    <script th:src="@{/js/order.js}"></script>
+</head>
+<body>
+<div class="green-bar">
+    <div class="delivery"><a th:href="@{/guest/home}" class="delivery">Delivery</a></div>
+</div>
+<div class="header">
+    <div class="right-links">
+        <div class="links">
+            <button><a th:href="@{/user/logout}">Logout</a></button>
+        </div>
+    </div>
+</div>
+<div class="order">Order</div>
+<div class="container">
+    <h2 class="order-info">ordering information</h2>
+    <form th:action="@{/user/order}" method="post" th:object="${order}">
+        <p><input type="text" th:field="*{name}" placeholder="Name"></p>
+        <p><input type="text" th:field="*{surname}" placeholder="Surname"></p>
+        <p><input type="text" th:field="*{address}" placeholder="Address"></p>
+        <p><input type="text" th:field="*{phoneNumber}" placeholder="Phone Number"></p>
+        <h2 class="payment-method">payment method</h2>
+        <div class="payment-options">
+            <p><input type="radio" name="payment" value="personal-account"/>Debit from a personal account</p>
+            <p><input type="radio" name="payment" value="cash-receipt"/>In cash upon receipt</p>
+            <p><input type="radio" name="payment" value="card-receipt"/>Payment card upon receipt</p>
+            <p><input type="radio" name="payment" value="card-now"/>Payment card now</p>
+        </div>
+        <div id="card-details" style="display: none">
+            <div class="card">
+                <div class="card-number">
+                    <input type="text" id="card-number" name="card-number" placeholder="Card Number">
+                </div>
+                <div class="card-holder">
+                    <input type="text" id="card-holder" name="card-holder" placeholder="Cardholder Name">
+                </div>
+                <div class="card-expiry">
+                    <input type="text" id="card-expiry" name="card-expiry" placeholder="MM / YY">
+                </div>
+                <div class="card-cvv">
+                    <input type="text" id="card-cvv" name="card-cvv" placeholder="CVV">
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="pay and order"/>
+    </form>
+</div>
+</body>
+</html>

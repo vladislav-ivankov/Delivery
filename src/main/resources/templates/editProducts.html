@@ -6,29 +6,38 @@
     <link rel="stylesheet" th:href="@{/css/editProducts.css}">
 </head>
 <body>
-<a th:href="@{/admin/addProduct}"><button class="add-product">Add product</button></a>
+<a th:href="@{/admin/addProduct}">
+    <button class="add-product">Add product</button>
+</a>
+<a th:href="@{/admin/characteristics}">
+    <button class="add-product">Characteristics</button>
+</a>
+<a th:href="@{/guest/home}" class="home"><img src="/img/button/home.png"></a>
 <h1>product console</h1>
 <table>
     <tr>
         <th>Id</th>
         <th>Product name</th>
-        <th>Category</th>
         <th>Price</th>
         <th>description</th>
         <th>Product Image Url</th>
     </tr>
     <tr th:each="product : ${products}">
-        <td th:text="${product.id}"></td>
-        <td th:text="${product.productName}"></td>
-        <td th:text="${product.category}"></td>
-        <td th:text="${product.price}"></td>
-        <td th:text="${product.description}"></td>
-        <td th:text="${product.image}"></td>
+        <td th:text="${product.id}" contenteditable="false"></td>
+        <td th:text="${product.productName}" contenteditable="true"></td>
+        <td th:text="${product.price}" contenteditable="true"></td>
+        <td th:text="${product.description}" contenteditable="true"></td>
+        <td th:text="${product.image}" contenteditable="true"></td>
         <td>
             <form th:action="@{/admin/editProduct/{id}(id=${product.id})}" method="post">
                 <input type="hidden" name="_method" value="delete"/>
                 <button type="submit">Delete</button>
             </form>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="7">
+            <button id="save-changes-btn">Save Changes</button>
         </td>
     </tr>
 </table>

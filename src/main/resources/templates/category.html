@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/category.css}">
+</head>
+<body>
+<div class="green-bar">
+    <div class="delivery"><a th:href="@{/guest/home}" class="delivery">Delivery</a></div>
+</div>
+<div class="header">
+    <div class="search-bar">
+        <form th:action="@{/guest/search}" method="GET">
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    <div class="right-links">
+        <div class="links">
+            <button><a th:href="${loginUrl}" th:text="${role == 'USER' || role == 'ADMIN' ? 'Cart' : 'Sign In'}"></a>
+            </button>
+            <button><a th:href="${regUrl}" th:text="${role == 'USER' || role == 'ADMIN' ? 'Logout' : 'Sign Up'}"></a>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="category">Categories</div>
+    <div class="categories">
+        <div th:each="category : ${categories}" class="category">
+            <a th:href="@{/guest/category/{id}(id=${category.id})}">
+                <img th:src="${category.categoryImg}" alt="Category Image">
+                <h3 th:text="${category.categoryName}"></h3>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

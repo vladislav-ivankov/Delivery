@@ -10,16 +10,6 @@
     <div class="delivery"><a th:href="@{/guest/home}" class="delivery">Delivery</a></div>
 </div>
 <div class="header">
-    <div class="left-link">
-        <a th:if="${role == 'ADMIN'}" th:href="${editUsersUrl}">
-            <img src="/img/button/edit-user.png">
-            <div>Edit users</div>
-        </a>
-        <a th:if="${role == 'ADMIN'}" th:href="${editProductsUrl}">
-            <img src="/img/button/edit-product.png">
-            <div>Edit products</div>
-        </a>
-    </div>
     <div class="search-bar">
         <form th:action="@{/guest/search}" method="GET">
             <input type="text" name="query" placeholder="Search...">
@@ -42,17 +32,24 @@
         <p class="product-description" th:text="${product.description}"></p>
     </div>
     <div class="product-info">
-
-        <div class="product-price" th:text="${product.price}"></div>
+        <div class="product-price" th:text="${product.price} + ' $'"></div>
         <div class="product-buttons">
             <button><a th:href="@{/user/cart}"></a> Add to cart</button>
             <button><a></a>Buy now</button>
         </div>
         <div class="characteristics">
+            <p>
             <div>Characteristics:</div>
+            </p>
+            <p>
             <div>Compound - <span th:text="${product.compound}"></span></div>
+            </p>
+            <p>
             <div>Storage conditions - <span th:text="${product.storage}"></span></div>
+            </p>
+            <p>
             <div>Manufacturer - <span th:text="${product.manufacturer}"></span></div>
+            </p>
         </div>
     </div>
 </div>

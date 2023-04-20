@@ -8,11 +8,23 @@
 <body>
 <h2>Add product</h2>
 <form th:action="@{/admin/addProduct}" th:method="POST" th:object="${product}">
+    <h4 class="sub-title">Main info</h4>
     <p><input type="text" th:field="*{image}" placeholder="Image Url"/></p>
     <p><input type="text" th:field="*{productName}" placeholder="Product name"/></p>
-    <p><input type="text" th:field="*{category}" placeholder="Category"/></p>
     <p><input type="number" th:field="*{price}" step="0.01" placeholder="Price"/></p>
     <p><textarea type="text" th:field="*{description}" placeholder="Description"/></p>
+    <h4 class="sub-title">Category</h4>
+    <div class="category">
+        <select name="categoryName">
+            <option th:each="category : ${categories}" th:value="${category.id}"
+                    th:text="${category.categoryName}"></option>
+        </select>
+        <button><a th:href="@{/admin/addCategory}">Add new Category</a></button>
+    </div>
+    <h4 class="sub-title">Characteristics</h4>
+    <p><textarea type="text" th:field="*{compound}" placeholder="Compound"/></p>
+    <p><textarea type="text" th:field="*{storage}" placeholder="Storage conditions"/></p>
+    <p><textarea type="text" th:field="*{manufacturer}" placeholder="Manufacturer"/></p>
     <p><input type="submit" value="Add Product"/></p>
 </form>
 </body>

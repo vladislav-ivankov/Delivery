@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/characteristics.css}">
+</head>
+<body>
+<a th:href="@{/guest/home}" class="home"><img src="/img/button/home.png"></a>
+<h1>Product characteristics</h1>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Product name</th>
+        <th>Compound</th>
+        <th>Storage conditions</th>
+        <th>Manufactured</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}" contenteditable="false"></td>
+        <td th:text="${product.productName}" contenteditable="true"></td>
+        <td th:text="${product.compound}" contenteditable="true"></td>
+        <td th:text="${product.storage}" contenteditable="true"></td>
+        <td th:text="${product.manufacturer}" contenteditable="true"></td>
+    </tr>
+</table>
+</body>
+</html>

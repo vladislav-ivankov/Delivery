@@ -6,23 +6,22 @@
     <link rel="stylesheet" th:href="@{/css/editUsers.css}">
 </head>
 <body>
-<a th:href="@{/admin/addAdmin}"><button class="add-admin">Add new admin</button></a>
+<a th:href="@{/admin/addAdmin}"><button class="add-admin">Add admin</button></a>
+<a th:href="@{/guest/home}" class="home"><img src="/img/button/home.png"></a>
 <h1>User Console</h1>
     <table>
         <tr>
             <th>Id</th>
             <th>Username</th>
-            <th>Year of birth</th>
+            <th>Age</th>
             <th>Email</th>
-            <th>Phone Number</th>
             <th>Role</th>
         </tr>
         <tr th:each="user : ${users}">
             <td th:text="${user.id}"></td>
             <td th:text="${user.username}"></td>
-            <td th:text="${user.yearOfBirth}"></td>
+            <td th:text="${user.age}"></td>
             <td th:text="${user.email}"></td>
-            <td th:text="${user.phoneNumber}"></td>
             <td th:text="${user.role}"></td>
             <td>
                 <form th:action="@{/admin/editUser/{id}(id=${user.id})}" method="post">

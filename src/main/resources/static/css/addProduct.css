@@ -46,6 +46,45 @@ form input[type="submit"] {
     transition: background-color 0.2s ease-in-out;
 }
 
+.category {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.category select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.category button {
+    display: block;
+    padding: 10px;
+    background-color: #77DD77;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    width: 100%;
+    text-decoration: none;
+}
+
+.category button a {
+    text-decoration: none;
+    color: white;
+}
+
+.category button:hover {
+    background-color: #52B74E;
+}
+
 form input[type="submit"]:hover {
     background-color: #52B74E;
 }
@@ -59,4 +98,8 @@ form textarea {
     border: none;
     font-size: 16px;
     resize: none;
+}
+
+.sub-title {
+    text-align: center;
 }

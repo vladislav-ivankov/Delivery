@@ -3,8 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
+    <script th:src="@{/js/cart.js}"></script>
 </head>
 <body>
-Cart
+<div class="green-bar">
+    <div class="delivery"><a th:href="@{/guest/home}" class="delivery">Delivery</a></div>
+</div>
+<div class="header">
+    <div class="search-bar">
+        <form th:action="@{/guest/search}" method="GET">
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    <div class="right-links">
+        <div class="links">
+            <button><a th:href="@{/user/logout}">Logout</a></button>
+        </div>
+    </div>
+</div>
+<div class="cart">Cart</div>
+<div class="cart-items">
+    <div th:each="product : ${cart.products}" class="cart-product">
+        <div class="product-image-container">
+            <img class="product-image" th:src="${product.image}" alt="Product Image">
+        </div>
+        <div class="product-info">
+            <div class="product-name" th:text="${product.productName}"></div>
+            <div class="product-price" th:text="${product.price} + ' $'"></div>
+            <div class="quantity">
+                <span>Qty:</span>
+                <input type="number" name="quantity" min="1"
+                       class="quantity-field" onchange="calculateSubtotal(this)">
+            </div>
+            <div class="product-subtotal">
+                <span>Subtotal:</span>
+                <span id="subtotal" th:text="${subtotal}"></span>
+            </div>
+        </div>
+        <form class="cart-form" th:action="@{/user/cart/{cartId}(cartId=${cart.id}, productId=${product.id})}"
+              method="post">
+            <img src="/img/button/remove.png"/>
+            <input type="hidden" name="_method" value="delete"/>
+        </form>
+    </div>
+</div>
+<div class="cart-total">
+    <div class="total-label">Total:</div>
+    <div class="total-value" th:text="${total}"></div>
+</div>
+<button class="go-an-order"><a th:href="@{/user/order}">place an order</a></button>
 </body>
 </html>
